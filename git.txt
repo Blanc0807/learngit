@@ -1,0 +1,97 @@
+----------------------创建版本库-------------------------
+git init                           //在文件夹中使用，初始化为Git库
+git add <file>                     //添加文件到库里
+git commit -m "xxxxxxxxx"          //提交文件，可以一次提交多个文件
+
+
+----------------------修改内容---------------------------
+
+git status                         //查看库状态（工作区）
+git diff <file>                    //查看文件修改内容（工作区与暂存区）                
+git diff -cached                   //比较暂存区与仓库分支里的文件
+//修改完文件后再add 和commit一下     
+
+
+---------------------------------------------------------
+//git diff比较内容
+-----------------------版本库--------------------------------------------
+                                         |                           |
+                                 git diff --cached                   |
+                                         |                           |
+-------------暂存区-----------------------------                git diff HEAD
+                        |                                            |
+                     git diff                                        |
+                        |                                            |
+-----工作区--------------------------------------------------------------  
+----------------------------------------------------------
+
+
+----------------------回退版本---------------------------
+git log                             //查看提交记录, 参数--pretty=online 日志一行输出
+//HEAD表示当前版本
+git reset --hard HEAD^              //回退上个版本
+git reset --hard HEAD^^             //回退到上两个版本
+git reset --hard HEAD~100           //回退前100个版本
+git reset --hard <commit ID>        //回退到commit ID版本
+git reflog                          //查看版本操作记录，可以查到某一版本的commit ID
+
+--------------------- 撤销修改--------------------------
+git checkout -- <file>              //撤销工作区修改内容
+git reset HEAD <file>               //撤销暂存区修改内容
+
+eg1:修改了工作区内容撤销，用git checkout -- 
+eg2:修改了暂存区内容撤销，用git reset HEAD, 再用eg1
+eg3:提交了修改内容，git reset --hard 
+
+---------------------远程仓库--------------------------
+git push -u origin master           //当前master分支推送到远程（第一次推送）
+git push origin <name>              //当前一分支推送到远程
+git clone git@github.com:username/gitname.git     //远程克隆一个库
+git remote                          //查看远程仓库信息，-v 详细信息
+
+---------------------分支-----------------------------
+master主分支上，创建一个dev分支，HEAD就指向了dev，以后commit的内容都是提交到dev分支上，
+而master指针不变；合并的时候讲dev指向master
+
+git checkout -b <name>              //创建并切换到dev分支上
+git branch  <name>                  //创建分支
+git checkout <name>                 //切换分支
+git branch                          //查看分支
+git merge <name>                    //合并分支
+git branch -d <name>                //删除分支
+
+git merge --no-ff -m "xxxxx" <name> //合并分支时保留分支历史
+
+git stash                           //保存当前分支工作进度
+git stash pop                       //回复保留的分支进度，并在内存中删除保留的分支
+
+git branch -D <name>                //删除未被合并的分支
+
+git checkout -b origin/<branch>     //本地创建远程origin的一个分支
+git pull origin <branch>            //推送到远程分支
+
+
+-----------------------------------------------------------
+多人协作的工作模式：
+1、首先，可以试图用git push origin <branch-name>推送自己的修改；
+
+2、如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+
+3、如果合并有冲突，则解决冲突，并在本地提交；
+
+4、没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+
+5、如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>。
+
+查看远程库信息，使用git remote -v；
+
+本地新建的分支如果不推送到远程，对其他人就是不可见的；
+
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；
+
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；
+
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
+
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+-------------------------------------------------------------
