@@ -28,6 +28,7 @@ git diff -cached                   //比较暂存区与仓库分支里的文件
 
 ----------------------回退版本---------------------------
 git log                             //查看提交记录, 参数--pretty=online 日志一行输出
+git log --graph --pretty=oneline --abbrev-commit    //
 //HEAD表示当前版本
 git reset --hard HEAD^              //回退上个版本
 git reset --hard HEAD^^             //回退到上两个版本
@@ -94,4 +95,13 @@ git pull origin <branch>            //推送到远程分支
 建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；
 
 从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。
+-------------------------------------------------------------
+
+-------------------------标签--------------------------------
+git tag <tag_name>（commitID）       //给当前分支打标签
+git tag                              //查看标签
+git show <tag_name>                  //查看标签详细信息
+git tag -a <tag_name> -m "desc"      //创建带有说明文字的标签
+git tag -d <tag_name>                //删除标签
+
 -------------------------------------------------------------
