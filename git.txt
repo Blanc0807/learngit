@@ -45,6 +45,7 @@ eg2:修改了暂存区内容撤销，用git reset HEAD, 再用eg1
 eg3:提交了修改内容，git reset --hard 
 
 ---------------------远程仓库--------------------------
+ssh-keygen -t rsa -C "youremail@example.com"   //创建密匙，在用户文件夹根目录下
 git push -u origin master           //当前master分支推送到远程（第一次推送）
 git push origin <name>              //当前一分支推送到远程
 git clone git@github.com:username/gitname.git     //远程克隆一个库
@@ -105,3 +106,8 @@ git tag -a <tag_name> -m "desc"      //创建带有说明文字的标签
 git tag -d <tag_name>                //删除标签
 
 -------------------------------------------------------------
+
+git config --global alias.xx XXX/"xx xx xx"
+eg:
+git config --global alias.ci commit
+git config --global alias.unstage 'reset HEAD'
