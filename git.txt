@@ -111,3 +111,17 @@ git config --global alias.xx XXX/"xx xx xx"
 eg:
 git config --global alias.ci commit
 git config --global alias.unstage 'reset HEAD'
+
+-------------------------------------------------------------
+ERROR:The following untracked working tree files would be overwritten by checkout.
+git clean
+-n 显示将要删除的文件和目录；
+
+-x -----删除忽略文件已经对git来说不识别的文件
+
+-d -----删除未被添加到git的路径中的文件
+
+-f -----强制运行
+
+git clean -d -fx
+
